@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // Invente um nome para o Hotel. 
+    // Ao acessar o sistema, exiba "Bem vindo ao {Hotel}".
+    // Ao acessar o sistema, pergunte o nome do usuario e uma senha. O nome do usuario nao precisa de validacao. A senha deve ser 2678.  
+    // Na funcao "inicio", utilize escolha/caso (switch/case) para validar a opcao escolhida pelo do usuario.
+
+    // Sempre que o usuario acessar o sistema, diga "Bem vindo ao Hotel {Hotel}, {Nome}. e um imenso prazer ter voce por aqui!".
+    // Substituir a expressao {Hotel} pelo nome do hotel informado pelo em todos os pontos do ccdigo.
+    // Sempre que o usuario sair do sistema, exiba a mensagem "Muito obrigado e ate logo, {Nome}."
+    // Para cada escolha que o usuario fizer no menu principal, deve ser desenvolvido um programa seguindo as instrucoes abaixo. Esse programa deve ser criado utilizando uma função principal como chamada. Todo o restante é feito com sua liberdade.
+    // Atualize o menu de opcoes e a funcao inicio com todas as opcoes de programas abaixo. 
+    // Atualize a funcao "erro" com as novas opcoes do menu.
+    // Ao encerrar qualquer programa abaixo, sempre retorne ao menu inicial.
+    var nomeHotel = "hotelzinho";
+    var senha = 2678
+    alert(`Seja bem vindo ao ${nomeHotel}`);
+    function verificar_senha() {
+        var NomeUsuario = prompt('Por favor, digite seu nome: ');
+        var senhaDigitada = window.prompt('Digite a senha a seguir:');
+        //criar uma variaver que pegue o parse int
+        console.log(senhaDigitada);
+        if (senha == senhaDigitada) {
+            alert('Acesso válido');
+            sistema_acessado(NomeUsuario);
+        }
+        else if (senhaDigitada === '') {
+            alert('Insira uma senha válida');
+            verificar_senha();
+        }
+        else {
+            alert('Acesso negado');
+            verificar_senha();
+        }
+    }
+
+    function sistema_acessado(nome) {
+        alert(`Bem vindo ao Hotel ${nomeHotel}, ${nome}. e um imenso prazer ter voce por aqui!`);
+         inicio();
+    }
+    function inicio() {
+
+        var escolha = prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n1. Cadastrar \n2. Pesquisar \n3. Sair')
+        switch (escolha) {
+            case 1:
+                alert('Você escolheu A OPÇÃO cadastro');
+                break;
+            case 2:
+                alert('Você está na opção pesquisa');
+                break;
+            case 3:
+                alert('Você escolheu sair');
+                break;
+        }
+    }
+
+    // verificar_senha();
+    sistema_acessado();
+
+    
+    // function sistema_cadastrar_hospedes() {
+
+    // var escolha_hospedes = parseInt(prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n1. Cadastrar \n2. Pesquisar \n3. Sair'));
+
+    // if (escolha_hospedes === 1) {
+    //     cadastrar_hospedes();
+    // } else if (escolha_hospedes === 2) {
+    //     pesquisar_hospedes();
+    // } else if (escolha_hospedes === 3) {
+    //     //inicio();
+    // } else {
+    //     erro_pesquisar_hospedes();
+    // }
+    // }
+</script>
+
+<body>
+
+</body>
+
+</html>
