@@ -6,83 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<script>
-    // Invente um nome para o Hotel. 
-    // Ao acessar o sistema, exiba "Bem vindo ao {Hotel}".
-    // Ao acessar o sistema, pergunte o nome do usuario e uma senha. O nome do usuario nao precisa de validacao. A senha deve ser 2678.  
-    // Na funcao "inicio", utilize escolha/caso (switch/case) para validar a opcao escolhida pelo do usuario.
-
-    // Sempre que o usuario acessar o sistema, diga "Bem vindo ao Hotel {Hotel}, {Nome}. e um imenso prazer ter voce por aqui!".
-    // Substituir a expressao {Hotel} pelo nome do hotel informado pelo em todos os pontos do ccdigo.
-    // Sempre que o usuario sair do sistema, exiba a mensagem "Muito obrigado e ate logo, {Nome}."
-    // Para cada escolha que o usuario fizer no menu principal, deve ser desenvolvido um programa seguindo as instrucoes abaixo. Esse programa deve ser criado utilizando uma função principal como chamada. Todo o restante é feito com sua liberdade.
-    // Atualize o menu de opcoes e a funcao inicio com todas as opcoes de programas abaixo. 
-    // Atualize a funcao "erro" com as novas opcoes do menu.
-    // Ao encerrar qualquer programa abaixo, sempre retorne ao menu inicial.
-    var nomeHotel = "hotelzinho";
-    var senha = 2678
-    alert(`Seja bem vindo ao ${nomeHotel}`);
-    function verificar_senha() {
-        var NomeUsuario = prompt('Por favor, digite seu nome: ');
-        var senhaDigitada = window.prompt('Digite a senha a seguir:');
-        //criar uma variaver que pegue o parse int
-        console.log(senhaDigitada);
-        if (senha == senhaDigitada) {
-            alert('Acesso válido');
-            sistema_acessado(NomeUsuario);
-        }
-        else if (senhaDigitada === '') {
-            alert('Insira uma senha válida');
-            verificar_senha();
-        }
-        else {
-            alert('Acesso negado');
-            verificar_senha();
-        }
-    }
-
-    function sistema_acessado(nome) {
-        alert(`Bem vindo ao Hotel ${nomeHotel}, ${nome}. e um imenso prazer ter voce por aqui!`);
-         inicio();
-    }
-    function inicio() {
-
-        var escolha = prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n1. Cadastrar \n2. Pesquisar \n3. Sair')
-        switch (escolha) {
-            case 1:
-                alert('Você escolheu A OPÇÃO cadastro');
-                break;
-            case 2:
-                alert('Você está na opção pesquisa');
-                break;
-            case 3:
-                alert('Você escolheu sair');
-                break;
-        }
-    }
-
-    // verificar_senha();
-    sistema_acessado();
-
-    
-    // function sistema_cadastrar_hospedes() {
-
-    // var escolha_hospedes = parseInt(prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n1. Cadastrar \n2. Pesquisar \n3. Sair'));
-
-    // if (escolha_hospedes === 1) {
-    //     cadastrar_hospedes();
-    // } else if (escolha_hospedes === 2) {
-    //     pesquisar_hospedes();
-    // } else if (escolha_hospedes === 3) {
-    //     //inicio();
-    // } else {
-    //     erro_pesquisar_hospedes();
-    // }
-    // }
-</script>
 
 <body>
+    <script>
+        var nomeHotel = "hotelzinho";
+        var senha = 2678;
+        var nome_usuario;
+        var lista_hospedes = [];
 
+        // Inicializa a lista de quartos, todos estão livres inicialmente
+        var quartos = [];
+        for (var i = 0; i < 20; i++) {
+            quartos.push({ numero: i + 1, ocupado: false });
+        }
+
+        // Função para verificar a senha
+        function verificar_senha() {
+            nome_usuario = prompt('Por favor, digite seu nome: ');
+            var senhaDigitada = parseInt(window.prompt('Digite a senha a seguir:'));
+
+            if (senha === senhaDigitada) {
+                alert('Acesso válido');
+                sistema_acessado(nome_usuario);
+            } else if (isNaN(senhaDigitada) || senhaDigitada === null) {
+                alert('Insira uma senha válida');
+                verificar_senha();
+            } else {
+                alert('Acesso negado');
+                verificar_senha();
+            }
+        }
+
+        // Função para mostrar mensagem de boas-vindas ao sistema
+        function sistema_acessado(nome) {
+            alert(`Bem vindo ao Hotel ${nomeHotel}, ${nome}. É um imenso prazer tê-lo por aqui!`);
+            inicio();
+        }
+
+        // Função para iniciar o sistema e exibir o menu principal
+        function inicio() {
+            var escolha = parseInt(prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n 1.Reservar\n 2.Cadastrar \n 3.Pesquisar \n 4.Listar \n 5.Sair'));
+
+            switch (escolha) {
+                case 1:
+                    alert('Você escolheu a opção reservar');
+                    reserva_quarto();
+                    break;
+                case 2:
+                    alert('Você escolheu a opção cadastro');
+                    cadastrar_hospedes();
+                    break;
+                case 3:
+                    alert('Você está na opção pesquisa');
+                    pesquisar_hospedes();
+                    break;
+                case 4:
+                    alert('Você escolheu sair');
+                    break;
+                default:
+                    erro();
+            }
+        }
+
+        // Função para reservar um quarto
+        function reserva_quarto() {
+            var dias_hospedados = parseInt(prompt("Quantas diárias serão necessárias?"));
+
+            var quantidade_dias = (dias_hospedados <= 1) ? "dia" : "dias";
+
+            var valor_diaria = parseFloat(prompt("Qual o valor padrão da diária?"));
+
+            // Inicializa as variáveis de contagem de descontos
+            var gratuita = 0;
+            var meia = 0;
+
+            // Inicializa as variáveis de total de descontos e total a pagar
+            var total_descontos = 0;
+            var total_a_pagar = 0;
+
+            var pergunta = "";
+
+            while (pergunta !== "pare") {
+                var nome_hospede = prompt("Qual o nome do hóspede?");
+                lista_hospedes.push(nome_hospede);
+
+                var idade_hospede = parseInt(prompt("Qual a idade do hóspede?"));
+
+                pergunta = prompt("Deseja inserir mais um hospede? Se não digite pare");
+
+                // Verifica se o hóspede tem direito a desconto
+                if (idade_hospede <= 6) {
+                    alert(`${nome_hospede} possui gratuidade.`);
+                    gratuita++;
+                } else if (idade_hospede >= 60) {
+                    meia++;
+                    alert(`${nome_hospede} paga meia.`);
+                }
+            }
+
+            var total_desconto_gratuidade = valor_diaria * gratuita;
+
+            // Calcula o total de descontos de meia hospedagem
+            var total_desconto_meia = (valor_diaria * meia) / 2;
+
+            // Soma os descontos ao total de descontos
+            total_descontos = total_desconto_gratuidade + total_desconto_meia;
+
+            // Calcula o total a pagar
+            total_a_pagar = (valor_diaria * dias_hospedados) - total_descontos;
+
+            // Exibe a mensagem de confirmação da hospedagem
+            alert(`${nome_usuario}, o valor total das hospedagens é: R$${total_a_pagar.toFixed(2)}; ${gratuita} gratuidade(s); ${meia} meia(s)`);
+            inicio();
+        }
+
+        function cadastrar_hospedes() {
+            if (lista_hospedes.length >= 15) {
+                alert("Numero máximo de hóspedes cadastrados.");
+            } else {
+                var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
+                lista_hospedes.push(nome_hospede);
+                console.log(lista_hospedes);
+                alert("Sucesso! Hóspede " + nome_hospede + " foi cadastrada(o) com sucesso!\n");
+            }
+
+            inicio();
+        }
+
+        function pesquisar_hospedes() {
+            var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede para pesquisa:');
+            if (lista_hospedes.includes(nome_hospede)) {
+                alert(nome_hospede + ' encontrada(o).')
+            } else {
+                alert(nome_hospede + ' não foi encontrada(o).')
+            }
+
+            inicio();
+        }
+
+        // Função para lidar com erros de entrada
+        function erro() {
+            alert('Por favor, informe um número entre 1 e 4');
+            inicio();
+        }
+
+        // Iniciar o sistema
+        verificar_senha();
+
+    </script>
 </body>
 
 </html>
