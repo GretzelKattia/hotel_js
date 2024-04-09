@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento</title>
+</head>
+
+<body>
+    <script>
+        // O auditório Laranja conta com 150 lugares e espaço para até 70 cadeiras adicionais. 
+        var auditorio_laranja = 150;
+        var lugares_laranja = 150; // Definindo o número de lugares no auditório Laranja
+        var adicionais_laranja = 70;
+        var total_maximo_laranja = 220;
+        // O auditório Colorado conta com 350 lugares, sem espaço para mais cadeiras. 
+        var auditorio_colorado = 350;
+        var adicionais_colorado = 0;
+        
+        // Recebe o número de convidados
+        var num_convidados = parseInt(prompt("Qual o número de convidados para o seu evento?"));
+
+        if (num_convidados < 0 || num_convidados > auditorio_colorado || isNaN(num_convidados)) {
+            alert("Quantidade de convidados superior à capacidade máxima");
+        } 
+        
+        else {
+            // Verifica qual auditório é o mais adequado
+            if (num_convidados <= total_maximo_laranja) {
+                // Auditório Laranja
+                var cadeiras_adicionais_necessarias =num_convidados - lugares_laranja;
+                var quantidade_necessaria = (cadeiras_adicionais_necessarias > 0) ? `(inclua mais ${cadeiras_adicionais_necessarias} cadeiras)` : '';
+                alert("Use o auditório Laranja " + quantidade_necessaria);
+            } 
+            
+            else {
+                // Auditório Colorado
+                alert("Use o auditório Colorado");
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+<!-- A função `Math.max(a, b)` retorna o maior valor entre `a` e `b`. No caso específico que você mencionou:
+
+```javascript
+Math.max(0, num_convidados - lugares_laranja);
+```
+
+- `num_convidados - lugares_laranja`: Calcula a diferença entre o número de convidados e o número de lugares disponíveis no auditório Laranja. Se essa diferença for negativa, significa que há lugares suficientes no auditório Laranja, portanto retornará 0.
+- `0`: É o valor mínimo considerado. Se a diferença calculada for negativa, ou seja, se houver mais lugares disponíveis do que convidados, retornará 0.
+
+Essa expressão `Math.max(0, num_convidados - lugares_laranja)` garante que o valor mínimo retornado seja 0, evitando retornar valores negativos. Se a diferença for positiva, isso indica quantas cadeiras adicionais seriam necessárias no auditório Laranja. -->
