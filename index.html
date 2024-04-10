@@ -45,7 +45,7 @@
 
         // Função para iniciar o sistema e exibir o menu principal
         function inicio() {
-            var escolha = parseInt(prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n 1.Reservar\n 2.Cadastrar \n 3.Pesquisar \n 4.Listar \n 5.Sair'));
+            var escolha = parseInt(prompt('Cadastro de Hóspedes\nSelecione uma opção:\n\n 1.Reservar\n 2.Cadastrar\n 3.Pesquisar\n 4.Sair'));
 
             switch (escolha) {
                 case 1:
@@ -62,6 +62,7 @@
                     break;
                 case 4:
                     alert('Você escolheu sair');
+                    sair()
                     break;
                 default:
                     erro();
@@ -123,9 +124,17 @@
             total_a_pagar = (valor_diaria * dias_hospedados * total_hospedes) - total_descontos;
             alert(total_a_pagar);
 
+            // "{Nome}, o valor total das hospedagens é: R$250; 1 gratuidade(s); 1 meia(s)"
 
-            // Exibe a mensagem de confirmação da hospedagem
-            alert(`${nome_usuario}, o valor total das hospedagens é: R$${total_a_pagar.toFixed(2)}; ${gratuita} gratuidade(s); ${meia} meia(s)`);
+            // Exibe a mensagem de confirmação da 
+            
+            var quantidade_gratuito = (gratuita >= 1) ? `${gratuita} gratuidade(s); ` : ``;
+            var quantidade_meia = (meia >= 1) ? `${meia} meia(s).` : ``;
+
+
+            // alert(`${nome_usuario}, o valor total das hospedagens é: R$${total_a_pagar.toFixed(2)}; ${gratuita} gratuidade(s); ${meia} meia(s)`);
+            alert(`${nome_usuario}, o valor total das hospedagens é: R$${total_a_pagar.toFixed(2)}; ${quantidade_gratuito} ${quantidade_meia}`);
+
             inicio();
         }
 
@@ -136,7 +145,8 @@
                 var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
                 lista_hospedes.push(nome_hospede);
                 console.log(lista_hospedes);
-                alert("Sucesso! Hóspede " + nome_hospede + " foi cadastrada(o) com sucesso!\n");
+                alert(`Sucesso! Hóspede  ${nome_hospede} foi cadastrada(o) com sucesso!\n`);
+                // alert("Sucesso! Hóspede " + nome_hospede + " foi cadastrada(o) com sucesso!\n");
             }
 
             inicio();
@@ -145,12 +155,19 @@
         function pesquisar_hospedes() {
             var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede para pesquisa:');
             if (lista_hospedes.includes(nome_hospede)) {
-                alert(nome_hospede + ' encontrada(o).')
+                alert(`${nome_hospede} encontrada(o).`);
+                // alert(nome_hospede + ' encontrada(o).')
+
             } else {
-                alert(nome_hospede + ' não foi encontrada(o).')
+                alert(`${nome_hospede} não foi encontrada(o).`);
+                // alert(nome_hospede + ' não foi encontrada(o).');
             }
 
             inicio();
+        }
+
+        function sair() {
+            alert(`Muito obrigado(a) e até logo ${nome_usuario}`);
         }
 
         // Função para lidar com erros de entrada
