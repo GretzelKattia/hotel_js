@@ -84,11 +84,15 @@
             var total_descontos = 0;
             var total_a_pagar = 0;
 
+            // Inicializa as variáveis de total de hóspedes
+            var total_hospedes = 0;
+
             var pergunta = "";
 
             while (pergunta !== "pare") {
                 var nome_hospede = prompt("Qual o nome do hóspede?");
                 lista_hospedes.push(nome_hospede);
+                total_hospedes++; // Incrementa o número total de hóspedes
 
                 var idade_hospede = parseInt(prompt("Qual a idade do hóspede?"));
 
@@ -105,15 +109,20 @@
             }
 
             var total_desconto_gratuidade = valor_diaria * gratuita;
+            alert(total_desconto_gratuidade);
 
             // Calcula o total de descontos de meia hospedagem
             var total_desconto_meia = (valor_diaria * meia) / 2;
+            alert(total_desconto_meia);
 
             // Soma os descontos ao total de descontos
             total_descontos = total_desconto_gratuidade + total_desconto_meia;
+            alert(total_descontos);
 
             // Calcula o total a pagar
-            total_a_pagar = (valor_diaria * dias_hospedados) - total_descontos;
+            total_a_pagar = (valor_diaria * dias_hospedados * total_hospedes) - total_descontos;
+            alert(total_a_pagar);
+
 
             // Exibe a mensagem de confirmação da hospedagem
             alert(`${nome_usuario}, o valor total das hospedagens é: R$${total_a_pagar.toFixed(2)}; ${gratuita} gratuidade(s); ${meia} meia(s)`);
