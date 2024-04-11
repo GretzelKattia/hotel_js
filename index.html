@@ -14,6 +14,8 @@
         var nome_usuario;
         var lista_hospedes = [];
 
+        var nome_hospede;
+
         // Inicializa a lista de quartos, todos estão livres inicialmente
         var quartos = [];
         for (var i = 0; i < 20; i++) {
@@ -91,7 +93,7 @@
             var pergunta = "";
 
             while (pergunta !== "pare") {
-                var nome_hospede = prompt("Qual o nome do hóspede?");
+                nome_hospede = prompt("Qual o nome do hóspede?");
                 lista_hospedes.push(nome_hospede);
                 total_hospedes++; // Incrementa o número total de hóspedes
 
@@ -142,7 +144,7 @@
             if (lista_hospedes.length >= 15) {
                 alert("Numero máximo de hóspedes cadastrados.");
             } else {
-                var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
+                nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
                 lista_hospedes.push(nome_hospede);
                 console.log(lista_hospedes);
                 alert(`Sucesso! Hóspede  ${nome_hospede} foi cadastrada(o) com sucesso!\n`);
@@ -153,7 +155,7 @@
         }
 
         function pesquisar_hospedes() {
-            var nome_hospede = prompt('Por favor, informe o nome da(o) hóspede para pesquisa:');
+            nome_hospede = prompt('Por favor, informe o nome da(o) hóspede para pesquisa:');
             if (lista_hospedes.includes(nome_hospede)) {
                 alert(`${nome_hospede} encontrada(o).`);
                 // alert(nome_hospede + ' encontrada(o).')
