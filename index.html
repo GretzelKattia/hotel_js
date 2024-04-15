@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel</title>
+    <title>Document</title>
 </head>
 
 <body>
@@ -32,14 +32,6 @@
         var custoTotal_garcons;
         var custoTotal_comida;
         //----------------------------------------------------------------------------------------------------------------------
-
-        var menorOrcamento = null;
-        var empresaMenorOrcamento = "";
-
-        // var nome_empresa;
-        var quant_aparelho;
-        var valorTotal;
-
         // Definir o número máximo de tentativas permitidas
         const MAX_TENTATIVAS = 3;
 
@@ -62,11 +54,11 @@
             if (senha === senhaDigitada) {
                 alert('Acesso válido');
                 sistema_acessado(nome_usuario);
-            } 
+            }
             else if (isNaN(senhaDigitada) || senhaDigitada === null) {
                 alert('Insira uma senha válida');
                 verificar_senha();
-            } 
+            }
             else {
                 alert('Acesso negado');
                 verificar_senha();
@@ -143,7 +135,7 @@
                 if (idade_hospede <= 6) {
                     console.log(`${nome_hospede} possui gratuidade.`);
                     gratuita++;
-                } 
+                }
                 else if (idade_hospede >= 60) {
                     meia++;
                     console.log(`${nome_hospede} paga meia.`);
@@ -170,11 +162,11 @@
 
                 if (numero_quarto < 1 || numero_quarto > 20) {
                     alert("Número de quarto inválido. Por favor, escolha um número entre 1 e 20.");
-                } 
+                }
                 else {
                     if (quartos[numero_quarto - 1].ocupado) {
                         alert("Quarto ocupado. Escolha outro.");
-                    } 
+                    }
                     else {
                         quartos[numero_quarto - 1].ocupado = true;
                         quarto_disponivel = true;
@@ -190,7 +182,7 @@
         function cadastrar_hospedes() {
             if (lista_hospedes.length >= 15) {
                 alert("Numero máximo de hóspedes cadastrados.");
-            } 
+            }
             else {
                 nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
                 lista_hospedes.push(nome_hospede);
@@ -206,7 +198,7 @@
             nome_hospede = prompt('Por favor, informe o nome da(o) hóspede para pesquisa:');
             if (lista_hospedes.includes(nome_hospede)) {
                 alert(`${nome_hospede} encontrada(o).`);
-            } 
+            }
             else {
                 alert(`${nome_hospede} não foi encontrada(o).`);
             }
@@ -368,7 +360,7 @@
             else if (hora_escolhida < 7 || hora_escolhida > 15) {
                 alert("Auditório indisponível (7h - 15h).");
                 fim_de_semana(dia_da_semana_texto); // Chama a função novamente se a hora escolhida estiver fora do horário disponível
-            } 
+            }
             else {
                 alert("Hora inválida. Por favor, informe um número entre 7 e 15.");
                 fim_de_semana(dia_da_semana_texto); // Chama a função novamente se a hora escolhida estiver fora do horário disponível
@@ -501,15 +493,18 @@
         }
 
         function calcularOrcamento() {
-            //             Exemplo:
+
+            var menorOrcamento = null;
+            var empresaMenorOrcamento = "";
+
             while (true) {
-                nome_empresa = prompt("Qual o nome da empresa?");
+                var nome_empresa = prompt("Qual o nome da empresa?");
                 var valor_aparelho = parseFloat(prompt("Qual o valor por aparelho?"));
-                quant_aparelho = parseInt(prompt("Qual a quantidade de aparelhos?"));
+                var quant_aparelho = parseInt(prompt("Qual a quantidade de aparelhos?"));
                 var porcentagem_desc = parseFloat(prompt("Qual a porcentagem de desconto?"));
                 var quant_min_aparelho = parseInt(prompt("Qual o número mínimo de aparelhos para conseguir o desconto?"));
 
-                valorTotal = valorPorAparelho * quantidadeAparelhos;
+                var valorTotal = valor_aparelho * quant_aparelho;
 
                 // Verifica se a quantidade de aparelhos atinge o mínimo para aplicar o desconto
                 if (quant_aparelho >= quant_min_aparelho) {
@@ -539,17 +534,19 @@
             inicio();
         }
 
+// ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX
+
         // Função para lidar com erros de entrada
         function erro() {
             alert('Por favor, informe um número entre 1 e 7');
             // Adicionar um contador para limitar o número de tentativas
             tentativasErro_sistemaAcessado++;
             if (tentativasErro_sistemaAcessado < MAX_TENTATIVAS) {
-                inicio(); 
-            } 
+                inicio();
+            }
             else {
                 alert('Número máximo de tentativas excedido. Encerrando o programa.');
-                fecharGuia(); // Encerrar o programa após exceder o número máximo de tentativas
+                fecharGuia(); 
             }
         }
 
@@ -558,11 +555,11 @@
             // Adicionar um contador para limitar o número de tentativas
             tentativasErro_evento++;
             if (tentativasErro_evento < MAX_TENTATIVAS) {
-                inicio_evento(); 
-            } 
+                inicio_evento();
+            }
             else {
                 alert('Número máximo de tentativas excedido. Encerrando o programa.');
-                fecharGuia(); // Encerrar o programa após exceder o número máximo de tentativas
+                fecharGuia(); 
             }
         }
 
@@ -572,13 +569,15 @@
             // Adicionar um contador para limitar o número de tentativas
             tentativasErro_dia++;
             if (tentativasErro_dia < MAX_TENTATIVAS) {
-                horario(); 
-            } 
+                horario();
+            }
             else {
                 alert('Número máximo de tentativas excedido. Encerrando o programa.');
-                fecharGuia(); // Encerrar o programa após exceder o número máximo de tentativas
+                fecharGuia(); 
             }
         }
+// ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX ERRO XXX
+
 
         function sair_hotel() {
             alert(`Muito obrigado(a) e até logo ${nome_usuario}`);
